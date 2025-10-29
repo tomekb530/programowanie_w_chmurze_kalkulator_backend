@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.DOCDBCONNST
+    const mongoURI = process.env.AZURE_COSMOS_CONNECTIONSTRING || 'mongodb://localhost:27017/calculator-db';
     
     const conn = await mongoose.connect(mongoURI, {
       
