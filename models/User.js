@@ -52,9 +52,7 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Index dla szybszego wyszukiwania
-userSchema.index({ username: 1 });
-userSchema.index({ email: 1 });
+// Indeksy są automatycznie tworzone przez unique: true w definicji pól
 
 // Middleware do hashowania hasła przed zapisem
 userSchema.pre('save', async function(next) {

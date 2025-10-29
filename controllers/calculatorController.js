@@ -38,20 +38,23 @@ const add = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'addition', 
-      { a: numA, b: numB }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'addition', 
+        { a: numA, b: numB }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'addition',
       operands: { a: numA, b: numB },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {
@@ -80,20 +83,23 @@ const subtract = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'subtraction', 
-      { a: numA, b: numB }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'subtraction', 
+        { a: numA, b: numB }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'subtraction',
       operands: { a: numA, b: numB },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {
@@ -122,20 +128,23 @@ const multiply = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'multiplication', 
-      { a: numA, b: numB }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'multiplication', 
+        { a: numA, b: numB }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'multiplication',
       operands: { a: numA, b: numB },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {
@@ -173,20 +182,23 @@ const divide = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'division', 
-      { a: numA, b: numB }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'division', 
+        { a: numA, b: numB }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'division',
       operands: { a: numA, b: numB },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {
@@ -224,20 +236,23 @@ const power = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'exponentiation', 
-      { a: numA, b: numB }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'exponentiation', 
+        { a: numA, b: numB }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'exponentiation',
       operands: { a: numA, b: numB },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {
@@ -274,20 +289,23 @@ const sqrt = async (req, res) => {
       ipAddress: req.ip || req.connection.remoteAddress
     };
     
-    const calculation = await saveToHistory(
-      req.user?.userId, 
-      'square_root', 
-      { a: numA }, 
-      result, 
-      metadata
-    );
+    let calculation = null;
+    if (req.user?.userId) {
+      calculation = await saveToHistory(
+        req.user.userId, 
+        'square_root', 
+        { a: numA }, 
+        result, 
+        metadata
+      );
+    }
     
     res.json({
       success: true,
       operation: 'square_root',
       operands: { a: numA },
       result,
-      calculation_id: calculation._id,
+      calculation_id: calculation?._id,
       saved_to_history: !!req.user
     });
   } catch (error) {

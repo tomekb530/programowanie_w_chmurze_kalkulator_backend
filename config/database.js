@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/calculator-db';
+    const mongoURI = process.env.DOCDBCONNST
     
     const conn = await mongoose.connect(mongoURI, {
       

@@ -6,28 +6,32 @@ const { authenticateToken } = require('../middleware/auth');
 
 const router = express.Router();
 
-// Rate limiting dla endpointów autoryzacji
-const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minut
-  max: 5, // maksymalnie 5 prób na IP w 15 minut
-  message: {
-    success: false,
-    error: 'Too many authentication attempts',
-    message: 'Too many login/register attempts from this IP, please try again later.'
-  },
-  standardHeaders: true,
-  legacyHeaders: false
-});
+// Rate limiting dla endpointów autoryzacji (wyłączony w testach)
+const authLimiter = process.env.NODE_ENV === 'test' ? 
+  (req, res, next) => next() : // Pomiń w testach
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minut
+    max: 5, // maksymalnie 5 prób na IP w 15 minut
+    message: {
+      success: false,
+      error: 'Too many authentication attempts',
+      message: 'Too many login/register attempts from this IP, please try again later.'
+    },
+    standardHeaders: true,
+    legacyHeaders: false
+  });
 
-const registerLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000, // 1 godzina
-  max: 3, // maksymalnie 3 rejestracje na IP w godzinę
-  message: {
-    success: false,
-    error: 'Too many registration attempts',
-    message: 'Too many registration attempts from this IP, please try again later.'
-  }
-});
+const registerLimiter = process.env.NODE_ENV === 'test' ?
+  (req, res, next) => next() : // Pomiń w testach
+  rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 godzina
+    max: 3, // maksymalnie 3 rejestracje na IP w godzinę
+    message: {
+      success: false,
+      error: 'Too many registration attempts',
+      message: 'Too many registration attempts from this IP, please try again later.'
+    }
+  });
 
 // Walidacja rejestracji
 const registerValidation = [
