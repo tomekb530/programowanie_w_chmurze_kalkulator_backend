@@ -64,7 +64,7 @@ jobs:
         run: |
           az webapp config appsettings set \
             --name pro-kalkulator-backend \
-            --resource-group pro-kalkulator-backend \
+            --resource-group Kalkulator \
             --settings \
             GIT_COMMIT_HASH="${{ github.sha }}" \
             GIT_COMMIT_SHORT_HASH="${GITHUB_SHA:0:7}" \
