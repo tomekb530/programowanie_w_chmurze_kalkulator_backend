@@ -29,6 +29,14 @@ app.get('/', (req, res) => {
   res.json({
     message: 'Calculator REST API',
     version: '1.0.0',
+    commit: {
+      hash: process.env.GIT_COMMIT_HASH || 'unknown',
+      shortHash: process.env.GIT_COMMIT_SHORT_HASH || 'unknown',
+      branch: process.env.GIT_BRANCH || 'unknown',
+      author: process.env.GIT_COMMIT_AUTHOR || 'unknown',
+      date: process.env.GIT_COMMIT_DATE || 'unknown',
+      message: process.env.GIT_COMMIT_MESSAGE || 'unknown'
+    },
     endpoints: {
       register: 'POST /api/auth/register',
       login: 'POST /api/auth/login',
@@ -48,8 +56,8 @@ app.get('/', (req, res) => {
 // 404 handler
 app.use('*', (req, res) => {
   res.status(404).json({
-    error: 'Endpoint nie znaleziony',
-    message: 'Żądany endpoint nie istnieje'
+    error: 'Endpoint not found',
+    message: 'The requested endpoint does not exist'
   });
 });
 
