@@ -57,7 +57,7 @@ app.get('/', (req, res) => {
 app.use('*', (req, res) => {
   res.status(404).json({
     error: 'Endpoint nie znaleziony',
-    message: 'Żądany punkt końcowy nie istnieje'
+    message: 'Endpoint nie znaleziony'
   });
 });
 
