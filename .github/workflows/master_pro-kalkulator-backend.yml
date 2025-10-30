@@ -60,6 +60,14 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_65DD3F2F78D84E728505C11730F66346 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1813A0B09E6A4AA3974F4DB59175462D }}
 
+      - name: 'Deploy to Azure Web App'
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'pro-kalkulator-backend'
+          slot-name: 'Production'
+          package: .
+
       - name: Set commit info as Azure App Settings
         run: |
           az webapp config appsettings set \
@@ -72,12 +80,4 @@ jobs:
             GIT_COMMIT_AUTHOR="${{ github.actor }}" \
             GIT_COMMIT_DATE="${{ github.event.head_commit.timestamp }}" \
             GIT_COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
-
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'pro-kalkulator-backend'
-          slot-name: 'Production'
-          package: .
           
