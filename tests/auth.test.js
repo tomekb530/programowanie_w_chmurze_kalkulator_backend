@@ -43,7 +43,7 @@ describe('Authentication API', () => {
         .expect(201);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.message).toBe('User registered successfully');
+      expect(response.body.message).toBe('Użytkownik zarejestrowany pomyślnie');
       expect(response.body.data.user.username).toBe('newuser');
       expect(response.body.data.user.email).toBe('newuser@example.com');
       expect(response.body.data.user.password).toBeUndefined(); // Hasło nie powinno być zwrócone
@@ -71,7 +71,7 @@ describe('Authentication API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('User already exists');
+      expect(response.body.error).toBe('Użytkownik już istnieje');
     });
 
     test('should return error for duplicate email', async () => {
@@ -93,7 +93,7 @@ describe('Authentication API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('User already exists');
+      expect(response.body.error).toBe('Użytkownik już istnieje');
     });
 
     test('should return validation errors for invalid data', async () => {
@@ -107,7 +107,7 @@ describe('Authentication API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Validation failed');
+      expect(response.body.error).toBe('Błąd walidacji');
       expect(response.body.details).toBeDefined();
       expect(response.body.details.length).toBeGreaterThan(0);
     });
@@ -134,7 +134,7 @@ describe('Authentication API', () => {
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.message).toBe('Login successful');
+      expect(response.body.message).toBe('Logowanie pomyślne');
       expect(response.body.data.user.username).toBe('logintest');
       expect(response.body.data.token).toBeDefined();
     });
@@ -162,7 +162,7 @@ describe('Authentication API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Invalid credentials');
+      expect(response.body.error).toBe('Nieprawidłowe dane logowania');
     });
 
     test('should return error for non-existent user', async () => {
@@ -175,7 +175,7 @@ describe('Authentication API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Invalid credentials');
+      expect(response.body.error).toBe('Nieprawidłowe dane logowania');
     });
 
     test('should return validation error for missing fields', async () => {
@@ -188,7 +188,7 @@ describe('Authentication API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Validation failed');
+      expect(response.body.error).toBe('Błąd walidacji');
     });
   });
 
@@ -236,7 +236,7 @@ describe('Authentication API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Access denied');
+      expect(response.body.error).toBe('Dostęp zabroniony');
     });
 
     test('should return error with invalid token', async () => {
@@ -246,7 +246,7 @@ describe('Authentication API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Access denied');
+      expect(response.body.error).toBe('Dostęp zabroniony');
     });
   });
 
@@ -309,7 +309,7 @@ describe('Authentication API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Email already exists');
+      expect(response.body.error).toBe('Email już istnieje');
     });
   });
 
@@ -345,7 +345,7 @@ describe('Authentication API', () => {
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.message).toBe('Password changed successfully');
+      expect(response.body.message).toBe('Hasło zmienione pomyślnie');
 
       // Sprawdź czy można się zalogować nowym hasłem
       const loginResponse = await request(app)
@@ -370,7 +370,7 @@ describe('Authentication API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Invalid password');
+      expect(response.body.error).toBe('Nieprawidłowe hasło');
     });
   });
 });

@@ -61,7 +61,7 @@ const add = async (req, res) => {
     console.error('Addition error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -106,7 +106,7 @@ const subtract = async (req, res) => {
     console.error('Subtraction error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -151,7 +151,7 @@ const multiply = async (req, res) => {
     console.error('Multiplication error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -170,8 +170,8 @@ const divide = async (req, res) => {
     if (numB === 0) {
       return res.status(400).json({
         success: false,
-        error: 'Division by zero',
-        message: 'Cannot divide by zero'
+        error: 'Dzielenie przez zero',
+        message: 'Nie można dzielić przez zero'
       });
     }
     
@@ -205,7 +205,7 @@ const divide = async (req, res) => {
     console.error('Division error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -259,7 +259,7 @@ const power = async (req, res) => {
     console.error('Power error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -277,8 +277,8 @@ const sqrt = async (req, res) => {
     if (numA < 0) {
       return res.status(400).json({
         success: false,
-        error: 'Invalid operand',
-        message: 'Cannot calculate square root of a negative number'
+        error: 'Nieprawidłowy argument',
+        message: 'Nie można obliczyć pierwiastka kwadratowego z liczby ujemnej'
       });
     }
     
@@ -312,7 +312,7 @@ const sqrt = async (req, res) => {
     console.error('Square root error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -364,7 +364,7 @@ const getHistory = async (req, res) => {
     console.error('Get history error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -388,14 +388,14 @@ const clearHistory = async (req, res) => {
     
     res.json({
       success: true,
-      message: 'Calculation history cleared successfully',
+      message: 'Historia obliczeń wyczyszczona pomyślnie',
       deletedCount: deleteResult.deletedCount
     });
   } catch (error) {
     console.error('Clear history error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }
@@ -425,7 +425,7 @@ const getStats = async (req, res) => {
     console.error('Get stats error:', error);
     res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: 'Błąd wewnętrzny serwera',
       message: error.message
     });
   }

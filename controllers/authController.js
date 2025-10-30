@@ -17,10 +17,10 @@ const register = async (req, res) => {
     if (existingUser) {
       return res.status(400).json({
         success: false,
-        error: 'User already exists',
+        error: 'Użytkownik już istnieje',
         message: existingUser.email === email ? 
-          'User with this email already exists' : 
-          'Username is already taken'
+          'Użytkownik z tym adresem email już istnieje' : 
+          'Nazwa użytkownika jest już zajęta'
       });
     }
 
@@ -40,7 +40,7 @@ const register = async (req, res) => {
 
     res.status(201).json({
       success: true,
-      message: 'User registered successfully',
+      message: 'Użytkownik zarejestrowany pomyślnie',
       data: {
         user: user.toPublicJSON(),
         token,
@@ -60,7 +60,7 @@ const register = async (req, res) => {
       
       return res.status(400).json({
         success: false,
-        error: 'Validation failed',
+        error: 'Błąd walidacji',
         details: errors
       });
     }
@@ -70,15 +70,15 @@ const register = async (req, res) => {
       const field = Object.keys(error.keyPattern)[0];
       return res.status(400).json({
         success: false,
-        error: 'Duplicate value',
-        message: `${field} is already taken`
+        error: 'Wartość już istnieje',
+        message: `${field} jest już zajęty`
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Registration failed',
-      message: 'Internal server error during registration'
+      error: 'Rejestracja nieudana',
+      message: 'Błąd wewnętrzny serwera podczas rejestracji'
     });
   }
 };
@@ -93,8 +93,8 @@ const login = async (req, res) => {
     if (!login || !password) {
       return res.status(400).json({
         success: false,
-        error: 'Missing credentials',
-        message: 'Username/email and password are required'
+        error: 'Brakuje danych logowania',
+        message: 'Nazwa użytkownika/email i hasło są wymagane'
       });
     }
 
@@ -110,8 +110,8 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid credentials',
-        message: 'Invalid username/email or password'
+        error: 'Nieprawidłowe dane logowania',
+        message: 'Nieprawidłowa nazwa użytkownika/email lub hasło'
       });
     }
 
@@ -120,8 +120,8 @@ const login = async (req, res) => {
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid credentials',
-        message: 'Invalid username/email or password'
+        error: 'Nieprawidłowe dane logowania',
+        message: 'Nieprawidłowa nazwa użytkownika/email lub hasło'
       });
     }
 
@@ -133,7 +133,7 @@ const login = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Login successful',
+      message: 'Logowanie pomyślne',
       data: {
         user: user.toPublicJSON(),
         token,
@@ -145,8 +145,8 @@ const login = async (req, res) => {
     console.error('Login error:', error);
     res.status(500).json({
       success: false,
-      error: 'Login failed',
-      message: 'Internal server error during login'
+      error: 'Logowanie nieudane',
+      message: 'Błąd wewnętrzny serwera podczas logowania'
     });
   }
 };
@@ -161,8 +161,8 @@ const getProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        error: 'User not found',
-        message: 'User profile not found'
+        error: 'Użytkownik nie znaleziony',
+        message: 'Profil użytkownika nie został znaleziony'
       });
     }
 
@@ -181,8 +181,8 @@ const getProfile = async (req, res) => {
     console.error('Get profile error:', error);
     res.status(500).json({
       success: false,
-      error: 'Profile fetch failed',
-      message: 'Internal server error while fetching profile'
+      error: 'Pobieranie profilu nieudane',
+      message: 'Błąd wewnętrzny serwera podczas pobierania profilu'
     });
   }
 };
@@ -205,8 +205,8 @@ const updateProfile = async (req, res) => {
       if (existingUser) {
         return res.status(400).json({
           success: false,
-          error: 'Email already exists',
-          message: 'User with this email already exists'
+          error: 'Email już istnieje',
+          message: 'Użytkownik z tym adresem email już istnieje'
         });
       }
     }
@@ -228,14 +228,14 @@ const updateProfile = async (req, res) => {
     if (!updatedUser) {
       return res.status(404).json({
         success: false,
-        error: 'User not found',
-        message: 'User not found for update'
+        error: 'Użytkownik nie znaleziony',
+        message: 'Użytkownik nie został znaleziony do aktualizacji'
       });
     }
 
     res.json({
       success: true,
-      message: 'Profile updated successfully',
+      message: 'Profil zaktualizowany pomyślnie',
       data: {
         user: updatedUser.toPublicJSON()
       }
@@ -252,15 +252,15 @@ const updateProfile = async (req, res) => {
       
       return res.status(400).json({
         success: false,
-        error: 'Validation failed',
+        error: 'Błąd walidacji',
         details: errors
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Profile update failed',
-      message: 'Internal server error during profile update'
+      error: 'Aktualizacja profilu nieudana',
+      message: 'Błąd wewnętrzny serwera podczas aktualizacji profilu'
     });
   }
 };
@@ -276,8 +276,8 @@ const changePassword = async (req, res) => {
     if (!currentPassword || !newPassword) {
       return res.status(400).json({
         success: false,
-        error: 'Missing passwords',
-        message: 'Current password and new password are required'
+        error: 'Brakuje haseł',
+        message: 'Aktualne hasło i nowe hasło są wymagane'
       });
     }
 
@@ -285,8 +285,8 @@ const changePassword = async (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        error: 'User not found',
-        message: 'User not found'
+        error: 'Użytkownik nie znaleziony',
+        message: 'Użytkownik nie został znaleziony'
       });
     }
 
@@ -295,8 +295,8 @@ const changePassword = async (req, res) => {
     if (!isCurrentPasswordValid) {
       return res.status(401).json({
         success: false,
-        error: 'Invalid password',
-        message: 'Current password is incorrect'
+        error: 'Nieprawidłowe hasło',
+        message: 'Aktualne hasło jest nieprawidłowe'
       });
     }
 
@@ -306,7 +306,7 @@ const changePassword = async (req, res) => {
 
     res.json({
       success: true,
-      message: 'Password changed successfully'
+      message: 'Hasło zmienione pomyślnie'
     });
 
   } catch (error) {
@@ -320,15 +320,15 @@ const changePassword = async (req, res) => {
       
       return res.status(400).json({
         success: false,
-        error: 'Validation failed',
+        error: 'Błąd walidacji',
         details: errors
       });
     }
 
     res.status(500).json({
       success: false,
-      error: 'Password change failed',
-      message: 'Internal server error during password change'
+      error: 'Zmiana hasła nieudana',
+      message: 'Błąd wewnętrzny serwera podczas zmiany hasła'
     });
   }
 };

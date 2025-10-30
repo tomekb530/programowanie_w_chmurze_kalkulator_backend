@@ -10,8 +10,8 @@ const authenticateToken = async (req, res, next) => {
     if (!token) {
       return res.status(401).json({
         success: false,
-        error: 'Access denied',
-        message: 'No token provided. Please log in.'
+        error: 'Dostęp zabroniony',
+        message: 'Brak tokenu. Proszę się zalogować.'
       });
     }
 
@@ -23,8 +23,8 @@ const authenticateToken = async (req, res, next) => {
     if (!user || !user.isActive) {
       return res.status(401).json({
         success: false,
-        error: 'Access denied',
-        message: 'User not found or inactive'
+        error: 'Dostęp zabroniony',
+        message: 'Użytkownik nie znaleziony lub nieaktywny'
       });
     }
 
@@ -40,24 +40,24 @@ const authenticateToken = async (req, res, next) => {
     if (error.name === 'JsonWebTokenError') {
       return res.status(401).json({
         success: false,
-        error: 'Access denied',
-        message: 'Invalid token'
+        error: 'Dostęp zabroniony',
+        message: 'Nieprawidłowy token'
       });
     }
     
     if (error.name === 'TokenExpiredError') {
       return res.status(401).json({
         success: false,
-        error: 'Access denied',
-        message: 'Token expired. Please log in again.'
+        error: 'Dostęp zabroniony',
+        message: 'Token wygasł. Proszę zalogować się ponownie.'
       });
     }
 
     console.error('Authentication error:', error);
     res.status(500).json({
       success: false,
-      error: 'Authentication error',
-      message: 'Internal server error during authentication'
+      error: 'Błąd uwierzytelnienia',
+      message: 'Błąd wewnętrzny serwera podczas uwierzytelnienia'
     });
   }
 };

@@ -86,7 +86,7 @@ describe('Calculator API', () => {
         .send({ a: 'invalid', b: 3 })
         .expect(400);
 
-      expect(response.body.error).toBe('Validation failed');
+      expect(response.body.error).toBe('Błąd walidacji');
       expect(response.body.details).toBeDefined();
     });
   });
@@ -136,7 +136,7 @@ describe('Calculator API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Division by zero');
+      expect(response.body.error).toBe('Dzielenie przez zero');
     });
   });
 
@@ -172,7 +172,7 @@ describe('Calculator API', () => {
         .expect(400);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Invalid operand');
+      expect(response.body.error).toBe('Nieprawidłowy argument');
     });
   });
 
@@ -183,7 +183,7 @@ describe('Calculator API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Access denied');
+      expect(response.body.error).toBe('Dostęp zabroniony');
     });
 
     test('should return user calculation history', async () => {
@@ -239,7 +239,7 @@ describe('Calculator API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Access denied');
+      expect(response.body.error).toBe('Dostęp zabroniony');
     });
 
     test('should clear user calculation history', async () => {
@@ -255,7 +255,7 @@ describe('Calculator API', () => {
         .expect(200);
 
       expect(response.body.success).toBe(true);
-      expect(response.body.message).toBe('Calculation history cleared successfully');
+      expect(response.body.message).toBe('Historia obliczeń wyczyszczona pomyślnie');
       expect(response.body.deletedCount).toBe(1);
     });
   });
@@ -267,7 +267,7 @@ describe('Calculator API', () => {
         .expect(401);
 
       expect(response.body.success).toBe(false);
-      expect(response.body.error).toBe('Access denied');
+      expect(response.body.error).toBe('Dostęp zabroniony');
     });
 
     test('should return user statistics', async () => {
@@ -315,7 +315,7 @@ describe('Calculator API', () => {
         .get('/api/unknown')
         .expect(404);
 
-      expect(response.body.error).toBe('Endpoint not found');
+      expect(response.body.error).toBe('Endpoint nie znaleziony');
     });
   });
 });

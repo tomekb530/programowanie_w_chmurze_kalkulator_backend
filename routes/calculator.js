@@ -7,13 +7,13 @@ const router = express.Router();
 
 // Walidacja dla operacji z dwoma liczbami
 const twoNumbersValidation = [
-  body('a').isNumeric().withMessage('Parameter "a" must be a number'),
-  body('b').isNumeric().withMessage('Parameter "b" must be a number')
+  body('a').isNumeric().withMessage('Parametr "a" musi być liczbą'),
+  body('b').isNumeric().withMessage('Parametr "b" musi być liczbą')
 ];
 
 // Walidacja dla operacji z jedną liczbą
 const oneNumberValidation = [
-  body('a').isNumeric().withMessage('Parameter "a" must be a number')
+  body('a').isNumeric().withMessage('Parametr "a" musi być liczbą')
 ];
 
 // Middleware do sprawdzania błędów walidacji
@@ -21,7 +21,7 @@ const handleValidationErrors = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      error: 'Validation failed',
+      error: 'Błąd walidacji',
       details: errors.array()
     });
   }
